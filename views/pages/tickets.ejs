@@ -1,0 +1,13 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+<div class="jumbotron">
+    <h1><%= title %></h1>
+    <ul>
+        <% for(var i=0; i<tickets.length; i++) {%>
+        <li><%= tickets[i] %></li>
+        <% } %>
+    </ul>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,3 +1,18 @@
-<% include head %>
-<h1></h1>
-<% include foot %>
+        <%- include('partials/header') %>
+        <%- include('partials/navbar') %>
+
+        <div class="jumbotron">
+            <h1><%= title %></h1>
+            <p class="lead">Check out our articles below!</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="list-group">
+                  <!-- loop over blog posts and render them -->
+                  LIST_OF_POSTS
+                </div>
+            </div>
+        </div>
+
+        <%- include('partials/footer') %>
