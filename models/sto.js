@@ -1,13 +1,12 @@
-var Cat = mongoose.model('Cat', { name: String });
+var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
 
-var kitty = new Cat({ name: 'Zildjian' });
-kitty.save(function (err) {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log('meow');
-    }
+var StoSchema = new mongoose.Schema({
+    name:  String,
+    address: String,
+    
+    tickets: [Schema.Types.ObjectId],
+    about: String,
 });
 
-
-module.exports = router;
+module.exports = mongoose.model('Sto', StoSchema);

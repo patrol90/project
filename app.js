@@ -10,9 +10,17 @@ var mongoose = require('mongoose');
 var index = require('./routes/index');
 var sto = require('./routes/sto');
 var tickets = require('./routes/tickets');
+var users = require('./routes/users');
+
 
 var app = express();
-var db = mongoose.connect('mongodb://localhost/database')
+mongoose.connect('mongodb://localhost/database');
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+   console.info("DB ready");
+});
 
 
 // view engine setup
@@ -30,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/sto', sto);
 app.use('/tickets', tickets);
+app.use('/user', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
