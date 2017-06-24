@@ -4,10 +4,22 @@
 <div class="jumbotron">
     <h1><%= title %></h1>
     <ul>
-        <% for(var i=0; i<tickets.length; i++) {%>
-        <li><%= tickets[i] %></li>
-        <% } %>
+        <% if (tickets.length) { %>
+            <% tickets.forEach(function(ticket){ %>
+                <li><%= ticket.name %></li>
+            <% }); %>
+       <% } %>
     </ul>
 </div>
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3">
+        <div class="list-group">
 
+            <div class="well bs-component">
+                <%- include('../partials/form')  %>
+            </div>
+
+        </div>
+    </div>
+</div>
 <%- include('../partials/footer') %>

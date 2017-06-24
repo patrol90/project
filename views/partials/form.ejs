@@ -1,0 +1,21 @@
+<form action="<%= action %>" method="post" class="form-horizontal">
+    <fieldset>
+        <legend><%= formName %></legend>
+
+        <% if (fields.length) { %>
+            <% fields.forEach(function(field){ %>
+            <div class="form-group">
+                <label class="col-lg-2 control-label"><%= field.label %></label>
+                <div class="col-lg-10">
+                    <input type="<%= field.type %>" class="form-control" name="<%= field.name %>" <% if (field.property) { %> <%= field.property %> <% } %> >
+                </div>
+            </div>
+            <% }) %>
+        <% } %>
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="submit" class="btn btn-primary"><%= formName %></button> <!--Title for button is same as that of the page-->
+            </div>
+        </div>
+    </fieldset>
+</form>

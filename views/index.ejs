@@ -7,12 +7,18 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-6">
                 <div class="list-group">
-                  <!-- loop over blog posts and render them -->
-                  LIST_OF_POSTS
+                    <% if (fields.length) { %>
+
+                    <div class="well bs-component">
+                     <%- include('partials/form')  %>
+                    </div>
+                   <% } %>
+
                 </div>
             </div>
         </div>
+
 
         <%- include('partials/footer') %>
