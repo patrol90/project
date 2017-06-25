@@ -7,7 +7,17 @@
             <div class="form-group">
                 <label class="col-lg-2 control-label"><%= field.label %></label>
                 <div class="col-lg-10">
-                    <input type="<%= field.type %>" class="form-control" name="<%= field.name %>" <% if (field.property) { %> <%= field.property %> <% } %> >
+                    <% if (field.element == 'input'){ %>
+                        <input type="<%= field.type %>" class="form-control" name="<%= field.name %>" <% if (field.property) { %> <%= field.property %> <% } %> >
+                    <% } else if (field.element == 'select') {%>
+                        <select name="<%= field.name %>" class="form-control">
+                            <% field.values.forEach(function(option){ %>
+                                <option value="<%= option.val %>"><%= option.label %></option>
+                            <%  }) %>
+                        </select>
+                    <% } else if (field.element == 'textarea') { %>
+                            <textarea class="form-control" rows="5" name="<%= field.name %>" style="max-width:100%;" <% if (field.property) { %> <%= field.property %> <% } %>></textarea>
+                    <% }%>
                 </div>
             </div>
             <% }) %>

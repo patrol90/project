@@ -27,6 +27,7 @@ var UserSchema = new Schema({
     type:  {
         type: String,
         required: true,
+        enum: ['client', 'station'],
     },
     tickets: {
         type: [Schema.Types.ObjectId],

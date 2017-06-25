@@ -6,7 +6,7 @@
     <ul>
         <% if (tickets.length) { %>
             <% tickets.forEach(function(ticket){ %>
-                <li><%= ticket.name %></li>
+                <li><a href="/ticket/<%= ticket._id %>"> <%= ticket.name %></a></li>
             <% }); %>
        <% } %>
     </ul>

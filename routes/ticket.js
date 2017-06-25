@@ -16,9 +16,9 @@ router.get('/', function(req, res, next) {
             formName: 'Оставить заявку',
             action:"ticket/create",
             fields: [
-                {name:'name',type:'text',property:'required',label:'Название'},
-                {name:'info',type:'text',property:'required',label:'Содержание'},
-                {name:'contacts',type:'text',property:'required',label:'Ваши контакты'},
+                {name:'name',type:'text',property:'required',label:'Название',element: 'input'},
+                {name:'info',type:'text',property:'required',label:'Содержание',element :'textarea'},
+                {name:'contacts',type:'text',property:'required',label:'Ваши контакты', element: 'input'},
             ]
         });
     });
@@ -27,7 +27,28 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-    res.render('pages/ticket-select',{body:"Описание Заявки бла бла бла бла",title:"Заявка №1"});
+   Ticket.findOne({_id: req.params.id}).populate('user offerg').exec(function (err, result) {
+       if (req.session.user && req.session.user.type === 'station'){
+           req.session.user.lookNow = req.params.id;
+           req.session.save(function(err) {
+                if(err) console.log(err)
+           })
+           res.render('pages/ticket-select',{
+               body: result.info,
+               title: result.name,
+               userInfo: result.user,
+               offersInfo: result.offers,
+               canOffer: true,
+               formName: 'Оставить предложение',
+               action:"/offer/create",
+               fields: [
+                   {name:'description',type:'text',property:'required',label:'Предложение',element: 'input'},
+               ]
+           });
+       } else {
+           res.render('pages/ticket-select',{body:result.info,title:result.name,userInfo:result.user,canOffer: false});
+       }
+   });
 });
 
 router.post('/create', function(req, res, next) {

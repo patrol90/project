@@ -29,7 +29,7 @@ router.post('/create', function(req, res, next) {
             console.log(err);
         } else {
             console.log('new user');
-            req.session.user = {id: NewUser._id, name: NewUser.name}
+            req.session.user = {id: NewUser._id, name: NewUser.name, type: NewUser.type}
             res.redirect('/');
         }
     });

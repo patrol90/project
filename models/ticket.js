@@ -10,7 +10,10 @@ var TicketSchema = new Schema({
         type: String,
         required: true,
     },
-    stations: [Schema.Types.ObjectId],
+    offers: {
+        type: [Schema.Types.ObjectId],
+        ref: 'Offer',
+    },
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',

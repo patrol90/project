@@ -8,4 +8,4 @@ var StoSchema = new mongoose.Schema({
     about: String,
 });
 
-module.exports = mongoose.model('Sto', StoSchema);
+module.exports = mongoose.model('Station', StoSchema);
