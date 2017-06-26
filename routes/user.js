@@ -15,11 +15,16 @@ router.get('/', function(req, res, next) {
     console.log(req.session.user);
 });
 
+router.post('/login', function (req, res, next) {
+    User.checkUser(req.body);
+});
+
+
 router.post('/create', function(req, res, next) {
     var NewUser = new User({
         name:  req.body.name,
         login: req.body.login,
-        password: req.body.password,
+        password: hash(req.body.password),
         email: req.body.email,
         phone: req.body.phone,
         type: req.body.type,

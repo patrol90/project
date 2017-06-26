@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session')
 var MongoStore = require('connect-mongo')(session);
+var crypto = require('crypto');
 
 //routes
 var indexRouter = require('./routes/index');
@@ -15,6 +16,10 @@ var ticketRouter = require('./routes/ticket');
 var userRouter = require('./routes/user');
 var offerRouter = require('./routes/offer');
 
+function hash(text) {
+    return crypto.createHash('sha1')
+        .update(text).digest('base64')
+}
 
 var app = express();
 
@@ -77,3 +82,4 @@ db.once('open', function() {
 
 
 module.exports = app;
+
