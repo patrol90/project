@@ -8,7 +8,7 @@
                 <label class="col-lg-2 control-label"><%= field.label %></label>
                 <div class="col-lg-10">
                     <% if (field.element == 'input'){ %>
-                        <input type="<%= field.type %>" class="form-control" name="<%= field.name %>" <% if (field.property) { %> <%= field.property %> <% } %> >
+                        <input type="<%= field.type %>" class="form-control" name="<%= field.name %>" <% if (field.property) { %> <%= field.property %> <% } %> value="<%= field.value%>">
                     <% } else if (field.element == 'select') {%>
                         <select name="<%= field.name %>" class="form-control">
                             <% field.values.forEach(function(option){ %>

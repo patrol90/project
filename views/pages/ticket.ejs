@@ -4,7 +4,7 @@
 <div class="jumbotron">
     <h1><%= title %></h1>
     <ul>
-        <% if (tickets.length) { %>
+        <% if (locals.tickets.length) { %>
             <% tickets.forEach(function(ticket){ %>
                 <li><a href="/ticket/<%= ticket._id %>"> <%= ticket.name %></a></li>
             <% }); %>
@@ -14,10 +14,11 @@
 <div class="row">
     <div class="col-lg-6 col-lg-offset-3">
         <div class="list-group">
-
-            <div class="well bs-component">
-                <%- include('../partials/form')  %>
-            </div>
+            <% if (locals.fields) { %>
+                <div class="well bs-component">
+                    <%- include('../partials/form')  %>
+                </div>
+            <% } %>
 
         </div>
     </div>

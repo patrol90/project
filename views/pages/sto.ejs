@@ -5,9 +5,24 @@
             <h1><%= title %></h1>
             <ul>
             <% for(var i=0; i<sto.length; i++) {%>
-               <li><%= sto[i] %></li>
+               <li><a href="sto/<%= sto[i]._id %>"> <%= sto[i].name %></a></li>
             <% } %>
             </ul>
+        </div>
+
+        <div class="row">
+            <% if (locals.fields) { %>
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="list-group">
+
+
+                    <div class="well bs-component">
+                        <%- include('../partials/form')  %>
+                    </div>
+
+                </div>
+            </div>
+            <% } %>
         </div>
 
         <%- include('../partials/footer') %>

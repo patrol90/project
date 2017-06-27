@@ -16,10 +16,6 @@ var ticketRouter = require('./routes/ticket');
 var userRouter = require('./routes/user');
 var offerRouter = require('./routes/offer');
 
-function hash(text) {
-    return crypto.createHash('sha1')
-        .update(text).digest('base64')
-}
 
 var app = express();
 
@@ -79,7 +75,6 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     console.info("DB ready");
 });
-
 
 module.exports = app;
 

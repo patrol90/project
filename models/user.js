@@ -36,19 +36,5 @@ var UserSchema = new Schema({
     station: Schema.Types.ObjectId,
 });
 
-module.exports.checkUser = function(userData) {
-
-    // return User
-    //     .findOne({login: userData.login})
-    //     .then(function(doc){
-    //         if ( doc.password == hash(userData.password) ){
-    //             console.log("User password is ok");
-    //             return Promise.resolve(doc)
-    //         } else {
-    //             return Promise.reject("Error wrong")
-    //         }
-    //     })
-    return 'eee';
-}
 
 module.exports = mongoose.model('User', UserSchema);

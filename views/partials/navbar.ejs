@@ -1,10 +1,16 @@
 <div class="header clearfix">
+    <% if (locals.session) { %>
+    <h2> Добро пожаловать <%= session.name %></h2>
+    <% } %>
     <nav>
         <ul class="nav nav-pills pull-right">
             <li role="presentation"><a href="/">Главная</a></li>
             <li role="presentation"><a href="/ticket">Все заявки</a></li>
             <li role="presentation"><a href="/sto">Все сто</a></li>
+            <% if (locals.session && !locals.session.auth || !locals.session) { %>
+            <li role="presentation"><a href="/login">Авторизация</a></li>
+            <li role="presentation"><a href="/register">Регистрация</a></li>
+            <% } %>
         </ul>
-        <h3 class="text-muted">Node.js Blog</h3>
     </nav>
 </div>

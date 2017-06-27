@@ -4,9 +4,35 @@
 <div class="jumbotron">
     <h1><%= title %></h1>
     <section>
-
-        <%= body %>
+        <h2><%= address %></h2>
+        <h3><%= contacts %></h3>
+<br>
+        <p><%= body %></p>
     </section>
 </div>
+        <ul>
+            <% feed.forEach(function(feedback){ %>
+                    <li class="panel panel-default" style="list-style: none">
+                        <div class="panel-heading"><h3><%= feedback.header %></h3></div>
+                        <div class="panel-body"> <p><%= feedback.description %></p></div>
+                        <div class="panel-footer"> <small><%= feedback.create %></small></div>
+                    </li>
+            <% }) %>
+        </ul>
+
+<% if (locals.fields) { %>
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        <div class="list-group">
+
+
+            <div class="well bs-component">
+                <%- include('../partials/form')  %>
+            </div>
+
+        </div>
+    </div>
+</div>
+<% } %>
 
 <%- include('../partials/footer') %>

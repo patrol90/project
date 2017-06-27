@@ -9,15 +9,17 @@
         <h4><b>Автор:</b> <%= userInfo.name %></h4>
         <h4><b>Номер:</b> + <%= userInfo.phone %></h4>
     </section>
-    <section>
-        <div class="row">
-            Оставлено предложенний:
-            <%= offersInfo.length %>
-        </div>
-    </section>
+    <% if(locals.offersInfo) { %>
+        <section>
+            <div class="row">
+                Оставлено предложенний:
+                <%= offersInfo.length %>
+            </div>
+        </section>
+    <% } %>
     <br><br>
     <div class="row">
-        <% if (canOffer) { %>
+        <% if (locals.canOffer) { %>
             <div class="col-lg-8 col-lg-offset-2">
                 <div class="list-group">
 

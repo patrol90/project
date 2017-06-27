@@ -3,20 +3,36 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', {
-    title: 'Мой проект',
-    formName: 'Регистрация',
-    action:"user/create",
-    fields: [
-          {name:'name',type:'text',property:'required',label:'Имя',element:'input'},
-          {name:'login',type:'text',property:'required',label:'Логин',element:'input'},
-          {name:'password',type:'password',property:'required',label:'Пароль',element:'input'},
-          {name:'email',type:'email',property:'required',label:'Е-mail',element:'input'},
-          {name:'phone',type:'tel',property:'required',label:'Телефон',element:'input'},
-          {name:'type',type:'text',property:'required',label:'Тип',element:'select', values:[{label:'Клиент',val:'client'},{label:'Сто',val:'station'}]},
-    ]
-    });
+    res.render('index', {
+    title: 'Проект',
+    session: req.session.user});
+});
 
+router.get('/register', function(req, res, next) {
+    res.render('pages/register', {
+        title: 'Регистрация',
+        formName: 'Регистрация',
+        action:"/user/create",
+        fields: [
+            {name:'name',type:'text',property:'required',label:'Имя',element:'input'},
+            {name:'login',type:'text',property:'required',label:'Логин',element:'input'},
+            {name:'password',type:'password',property:'required',label:'Пароль',element:'input'},
+            {name:'email',type:'email',property:'required',label:'Е-mail',element:'input'},
+            {name:'phone',type:'tel',property:'required',label:'Телефон',element:'input'},
+            {name:'type',type:'text',property:'required',label:'Тип',element:'select', values:[{label:'Клиент',val:'client'},{label:'Сто',val:'station'}]},
+        ],
+    });
+});
+router.get('/login', function(req, res, next) {
+    res.render('pages/register', {
+        title: 'Авторизуйтесь',
+        formName: 'Авторизация',
+        action:"/user/login",
+        fields: [
+            {name:'login',type:'text',property:'required',label:'Логин',element:'input'},
+            {name:'password',type:'password',property:'required',label:'Пароль',element:'input'},
+        ]
+    });
 });
 
 module.exports = router;
