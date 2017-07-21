@@ -1,23 +1,24 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var session = require('express-session')
-var MongoStore = require('connect-mongo')(session);
-var crypto = require('crypto');
+const express = require('express'),
+path = require('path'),
+router = express.Router(),
+favicon = require('serve-favicon'),
+logger = require('morgan'),
+cookieParser = require('cookie-parser'),
+bodyParser = require('body-parser'),
+mongoose = require('mongoose'),
+session = require('express-session'),
+MongoStore = require('connect-mongo')(session),
+crypto = require('crypto');
 
 //routes
-var indexRouter = require('./routes/index');
-var stoRouter = require('./routes/sto');
-var ticketRouter = require('./routes/ticket');
-var userRouter = require('./routes/user');
-var offerRouter = require('./routes/offer');
+const indexRouter = require('./routes/index'),
+stoRouter = require('./routes/sto'),
+ticketRouter = require('./routes/ticket'),
+userRouter = require('./routes/user'),
+offerRouter = require('./routes/offer');
 
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -48,14 +49,14 @@ app.use('/user', userRouter);
 app.use('/offer', offerRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+app.use((req, res, next) => {
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -68,8 +69,8 @@ app.use(function(err, req, res, next) {
 
 
 
-mongoose.connect('mongodb://localhost/database');
-var db = mongoose.connection;
+mongoose.connect('mongodb://localhost/database',{useMongoClient: true});
+let db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
