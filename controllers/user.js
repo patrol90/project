@@ -1,4 +1,5 @@
-const User = require('../models/user');
+const User = require('../models/user'),
+bcrypt = require('bcrypt-nodejs');
 
 module.exports.showCabinet = (req, res, next) => {
     if(req.session.user){

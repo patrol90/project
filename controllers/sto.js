@@ -1,5 +1,6 @@
 const StoModel = require('../models/sto'),
-FeedbackModel = require('../models/feedback');
+FeedbackModel = require('../models/feedback'),
+helper = require('../public/helper');
 
 module.exports.showAll = (req, res, next) => {
     StoModel.find({},(err, result) => {
@@ -10,7 +11,7 @@ module.exports.showAll = (req, res, next) => {
                     title:"Все сто",
                     session: req.session.user,
                     formName: 'Добавить свое сто',
-                    action:"sto/create",
+                    action:"api/sto/create",
                     fields: [
                         {name:'name',type:'text',property:'required',label:'Название',element: 'input'},
                         {name:'address',type:'text',property:'required',label:'Адресс',element :'textarea'},
@@ -72,9 +73,7 @@ module.exports.createOne = (req, res, next) => {
         newSto.save((err) => {
             if(err){ throw err }
             else  {
-                console.log("Добавлено новое сто");
-                console.log(newSto);
-                res.redirect('/');
+                helper.sendJsonResponse(res,201,newSto)
             }
         });
     }
@@ -98,4 +97,23 @@ module.exports.createFeedback = (req, res, next) => {
             }
         });
     }
+}
+
+module.exports.jsonShowAll = (req, res, next) => {
+    StoModel.find({},(err, result) => {
+        if(!result){
+            helper.sendJsonResponse(res,404,{message:"stations not found"});
+        } else {
+            helper.sendJsonResponse(res,200,result);
+        }
+    });
+}
+module.exports.jsonShowOne = (req, res, next) => {
+    console.log(req.params);
+    StoModel.findOne({_id :req.params.id}).populate('feedback').exec((err, result) => {
+        if(err) console.log(err);
+        FeedbackModel.find({_id: result.feedbacks},(err,feedb) => {
+
+        });
+    });
 }

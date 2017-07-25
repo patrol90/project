@@ -10,12 +10,14 @@ session = require('express-session'),
 MongoStore = require('connect-mongo')(session),
 crypto = require('crypto');
 
+
 //routes
 const indexRouter = require('./routes/index'),
 stoRouter = require('./routes/sto'),
 ticketRouter = require('./routes/ticket'),
 userRouter = require('./routes/user'),
-offerRouter = require('./routes/offer');
+offerRouter = require('./routes/offer'),
+apiRouter = require('./routes/api')
 
 
 const app = express();
@@ -47,6 +49,7 @@ app.use('/sto', stoRouter);
 app.use('/ticket', ticketRouter);
 app.use('/user', userRouter);
 app.use('/offer', offerRouter);
+app.use('/api',apiRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
